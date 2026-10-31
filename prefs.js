@@ -131,6 +131,7 @@ export default class ForeverPreferences extends ExtensionPreferences {
                     ['icon', 'Search icon only'],
                     ['box', 'Search box'],
                 ]),
+                spinRow('Search box height', 'In pixels, used when the search box is shown.', 'search-height', 24, 48, 2),
                 spinRow('Search box width', 'In pixels, used when the search box is shown.', 'search-width', 60, 400, 10),
             ]),
             group('Buttons and keys', null, [

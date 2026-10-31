@@ -22,6 +22,11 @@
       <default>'box'</default>
       <summary>How the taskbar search is shown</summary>
     </key>
+    <key name="search-height" type="i">
+      <range min="24" max="48"/>
+      <default>36</default>
+      <summary>Height of the taskbar search box in pixels</summary>
+    </key>
     <key name="search-width" type="i">
       <range min="60" max="400"/>
       <default>120</default>

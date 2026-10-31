@@ -991,6 +991,7 @@ export default class Forever extends Extension {
             break;
         case 'search-mode':
         case 'search-width':
+        case 'search-height':
             this._applySearchMode();
             break;
         case 'show-task-view':
@@ -1824,7 +1825,9 @@ export default class Forever extends Extension {
                 widget.set_text('');
                 this._searchFromTaskbar(text);
             });
-            widget.style = `width: ${this._gs.get_int('search-width')}px;`;
+            const boxHeight = this._gs.get_int('search-height');
+            widget.style = `width: ${this._gs.get_int('search-width')}px; ` +
+                `min-height: ${boxHeight - 2}px; padding: 0 12px; border-radius: ${Math.round(boxHeight / 2)}px;`;
             this._searchEntry = widget;
         }
 
