@@ -14,11 +14,15 @@ Works with GNOME Shell 50 and 51. Not affiliated with, or derived from, any othe
 
 ## Features
 
-- **Taskbar** at the bottom: Start button, search (hidden / icon / box), Task view button, pinned and running apps
-  with a colored bar under running apps (color is configurable).
+- **Taskbar** at the bottom: Start button, search (hidden / icon / box, with adjustable width and height),
+  Task view button, pinned and running apps with a colored bar under running apps (color is configurable).
+  Icon size, spacing and taskbar height are adjustable.
 - **Start menu** centered on the screen: Pinned, Recommended and All apps (category / grid / list),
   reorderable sections, adjustable size, folders and spacing.
 - **Search** for apps, files, folders and documents (uses GNOME's search providers). Enter opens the first result.
+  Typing in the taskbar search box opens Start with the results.
+- **Right-click menus** on apps show what the app offers (New window and its own actions) next to pin / unpin.
+- **Account** name and picture come from your GNOME account.
 - **Super key** opens and closes Start. It also shows the taskbar over full-screen apps while Start is open.
 - **Hidden-icons tray** (arrow next to the system icons) listing background apps such as Discord or Telegram,
   in a grid or a list.
@@ -29,6 +33,17 @@ Works with GNOME Shell 50 and 51. Not affiliated with, or derived from, any othe
 - Bundled icon set for the Start button, search and Task view in transparent, dark, light or ember styles
   (transparent is the default), or use your distribution's logo or your own image for Start.
 - Skips GNOME's overview after login and can hide the dash in Task view.
+
+## What's new in 0.2
+
+- Taller taskbar search box (36 px by default) with a new height setting.
+- Bundled icon set (transparent, dark, light, ember) for Start, search and Task view.
+- Search for files, folders and documents, not only apps.
+- App right-click menus show New window and the app's own actions.
+- Account picture and name in the Start menu.
+- Hidden-icons tray: grid or list view, adjustable size, and it hides when nothing is running in the background.
+- Show desktop strip, taskbar over full-screen apps while Start is open, multi-monitor taskbars.
+- Running-app bar color, independent transparency, icon spacing and a highlighted Start button.
 
 ## Upcoming features
 
