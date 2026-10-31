@@ -1,2 +1,74 @@
-# 4ever-extension
-4ever-extension
+# 4ever
+
+> **AI disclaimer:** This extension was created with the help of Claude, an AI assistant made by Anthropic.
+> The design, testing and direction are by the repository owner. Review the code before relying on it.
+
+<!-- Add a screenshot: put an image at screenshots/preview.png (or change the path below). -->
+![4ever preview](screenshots/preview.png)
+
+A GNOME Shell extension that gives GNOME a familiar bottom-taskbar desktop: a centered Start menu,
+a taskbar with running apps, a hidden-icons tray, a clock, and notifications at the bottom right.
+Everything is configurable from the extension's settings window, so it replaces a stack of small extensions.
+
+Works with GNOME Shell 50 and 51. Not affiliated with, or derived from, any other operating system's code or branding.
+
+## Features
+
+- **Taskbar** at the bottom: Start button, search (hidden / icon / box), Task view button, pinned and running apps
+  with a colored bar under running apps (color is configurable).
+- **Start menu** centered on the screen: Pinned, Recommended and All apps (category / grid / list),
+  reorderable sections, adjustable size, folders and spacing.
+- **Search** for apps, files, folders and documents (uses GNOME's search providers). Enter opens the first result.
+- **Super key** opens and closes Start. It also shows the taskbar over full-screen apps while Start is open.
+- **Hidden-icons tray** (arrow next to the system icons) listing background apps such as Discord or Telegram,
+  in a grid or a list.
+- **Show desktop** strip at the right end of the taskbar.
+- **Multiple monitors**: an optional taskbar on every monitor, with separate switches for what it shows.
+- **Clock** layout, time zone and formats; light, dark or system theme; independent transparency for the
+  taskbar, the Start menu and the tray box; taskbar height, icon size and spacing.
+- Skips GNOME's overview after login and can hide the dash in Task view.
+
+## Upcoming features
+
+- A Pop!_OS 22.04 style look for the taskbar and desktop.
+- A Pop!_OS style Start menu.
+
+These are plans, not promises, and are not in the current version.
+
+## Install
+
+Download or build `4ever.zip`, then:
+
+```sh
+gnome-extensions install --force 4ever.zip
+```
+
+Log out and back in (on Wayland, new extensions load at login), then enable it:
+
+```sh
+gnome-extensions enable 4ever@4ever-extension.stradios
+```
+
+Open the settings from the extension manager, or right-click an empty part of the taskbar and choose
+"4ever settings".
+
+## Build
+
+```sh
+./build.sh
+```
+
+Needs `glib-compile-schemas` (from `glib2`/`libglib2.0-bin`) and `zip`.
+
+## Notes
+
+- The tray works through the StatusNotifierItem (AppIndicator) protocol. Apps that were already running when the
+  extension loaded may need a restart before they appear in it.
+- Start-menu pins are stored in `~/.config/4ever/start-pins.json`.
+- If you used this extension under its earlier name (Eleven), disable and remove it first so the two don't run together.
+  Your pins are picked up automatically.
+
+## License
+
+Add a license file before publishing. GNOME Extensions (extensions.gnome.org) requires a GPL-compatible
+license, for example GPL-3.0-or-later.

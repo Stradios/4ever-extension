@@ -1,0 +1,652 @@
+/* =====================================================================
+   4ever - dark (default). Light overrides are at the bottom, applied
+   when the "forever-light" class is on the shell's uiGroup.
+   ===================================================================== */
+
+/* ---- Panel / taskbar ---- */
+
+.forever-panel {
+  background-color: rgba(32, 32, 32, 0.92);
+  height: 48px;
+  font-weight: normal;
+}
+
+.forever-panel #panelLeft,
+.forever-panel .panel-button {
+  border-radius: 6px;
+}
+
+.forever-taskbar {
+  spacing: 4px;
+}
+
+.forever-start-button,
+.forever-app-button {
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: white;
+}
+
+.forever-start-button:hover,
+.forever-app-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.forever-app-button.active {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Start button: set apart from the other icons */
+.forever-start-button.forever-start-highlight {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.forever-start-button.forever-start-highlight:hover {
+  background-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Search field on the taskbar (kept small) */
+
+.forever-taskbar-entry {
+  width: 120px;
+  min-height: 0;
+  padding: 4px 10px;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: white;
+  font-size: 12px;
+}
+
+.forever-taskbar-entry:focus {
+  background-color: rgba(255, 255, 255, 0.14);
+  border-bottom: 2px solid #60cdff;
+}
+
+.forever-taskbar-entry-icon {
+  icon-size: 14px;
+  margin-right: 6px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* Tooltips */
+
+.forever-tooltip {
+  padding: 4px 10px;
+  border-radius: 6px;
+  background-color: rgba(48, 48, 48, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 12px;
+}
+
+/* ---- Clock: time over date, right-aligned ---- */
+
+.forever-clock {
+  padding: 0 8px;
+}
+
+.forever-clock-time {
+  font-size: 13px;
+  color: white;
+  text-align: right;
+}
+
+.forever-clock-date {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.85);
+  text-align: right;
+}
+
+/* Calendar popup: notifications above the calendar */
+
+.forever-calendar-area {
+  spacing: 12px;
+}
+
+/* ---- Start menu shell ---- */
+
+.forever-start-menu {
+  -arrow-rise: 0px;
+  -arrow-base: 0px;
+  -boxpointer-gap: 0px;
+}
+
+.forever-start-menu .popup-menu-content {
+  padding: 0;
+  margin: 0;
+  border-radius: 12px;
+  background-color: rgba(40, 40, 40, 0.97);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.forever-start {
+  width: 720px;
+  color: white;
+}
+
+/* ---- Search ---- */
+
+.forever-search-area {
+  padding: 18px 24px 14px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.forever-search {
+  padding: 8px 14px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 2px solid #60cdff;
+  color: white;
+}
+
+.forever-search:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.forever-search-icon {
+  icon-size: 16px;
+  margin-right: 8px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ---- Views ---- */
+
+.forever-scroll {
+  height: 520px;
+  padding: 0 24px;
+}
+
+.forever-scroll-box {
+  spacing: 4px;
+  padding: 8px 14px 12px 0;
+}
+
+.forever-section-header {
+  padding: 14px 4px 6px 4px;
+}
+
+.forever-section-title {
+  font-weight: bold;
+  font-size: 13px;
+  color: white;
+  padding: 4px 4px;
+}
+
+.forever-results-title {
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+
+.forever-hint {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  padding: 8px 4px;
+}
+
+.forever-letter {
+  font-weight: bold;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 10px 10px 4px 10px;
+}
+
+/* View drop-down: fixed width so the header never shifts */
+
+.forever-view-dropdown {
+  width: 128px;
+  spacing: 8px;
+  padding: 4px 10px;
+  margin-right: 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.forever-view-dropdown:hover,
+.forever-view-dropdown:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ---- Pinned / grid ---- */
+
+.forever-tile {
+  width: 100px;
+  margin: 2px;
+  padding: 10px 4px;
+  border-radius: 6px;
+  color: white;
+}
+
+.forever-tile:hover,
+.forever-tile:focus {
+  background-color: rgba(255, 255, 255, 0.09);
+}
+
+.forever-tile-label {
+  font-size: 11px;
+  max-width: 92px;
+  margin-top: 6px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* ---- Category cards: square, four icons each ---- */
+
+.forever-category {
+  width: 98px;
+  margin: 4px 16px 4px 0;
+  padding: 0;
+  border-radius: 8px;
+  color: white;
+}
+
+.forever-category:hover,
+.forever-category:focus {
+  background-color: rgba(255, 255, 255, 0.07);
+}
+
+.forever-category-card {
+  width: 80px;
+  height: 80px;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.forever-category-icon {
+  margin: 4px;
+}
+
+.forever-category-label {
+  font-size: 12px;
+  margin-top: 6px;
+  margin-bottom: 4px;
+  max-width: 98px;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* ---- List items (recommended, all apps, search results) ---- */
+
+.forever-list-item {
+  spacing: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: white;
+}
+
+.forever-list-item-half {
+  width: 320px;
+}
+
+.forever-list-item:hover,
+.forever-list-item:focus {
+  background-color: rgba(255, 255, 255, 0.09);
+}
+
+.forever-list-name {
+  font-size: 12px;
+  color: white;
+}
+
+.forever-list-subtitle {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ---- Footer ---- */
+
+.forever-footer {
+  padding: 10px 24px;
+  background-color: rgba(28, 28, 28, 0.9);
+  border-radius: 0 0 12px 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.forever-user {
+  spacing: 10px;
+  padding: 4px 10px 4px 6px;
+  border-radius: 6px;
+  color: white;
+}
+
+.forever-user:hover,
+.forever-user:focus {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.forever-avatar {
+  padding: 6px;
+  border-radius: 99px;
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.forever-user-name {
+  font-size: 12px;
+  color: white;
+}
+
+.forever-power {
+  padding: 8px 10px;
+  border-radius: 6px;
+  color: white;
+}
+
+.forever-power:hover,
+.forever-power:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ---- Flyouts (power menu, profile menu, right-click, category lists) ---- */
+
+.forever-flyout-scroll {
+  max-height: 360px;
+}
+
+.forever-flyout {
+  min-width: 210px;
+  padding: 6px;
+  border-radius: 8px;
+  background-color: rgba(52, 52, 52, 0.99);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.forever-flyout-item {
+  spacing: 12px;
+  padding: 7px 12px;
+  border-radius: 4px;
+  color: white;
+  font-size: 12px;
+}
+
+.forever-flyout-item:hover,
+.forever-flyout-item:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.forever-flyout-header {
+  spacing: 12px;
+  padding: 8px 12px 4px 12px;
+}
+
+.forever-flyout-title {
+  font-weight: bold;
+  font-size: 13px;
+  color: white;
+}
+
+.forever-flyout-icon-gap {
+  width: 16px;
+}
+
+.forever-flyout-separator {
+  height: 1px;
+  margin: 4px 6px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ---- Show desktop strip ---- */
+
+.forever-show-desktop {
+  width: 8px;
+  margin-left: 6px;
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 0;
+  padding: 0;
+}
+
+.forever-show-desktop:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.forever-light .forever-show-desktop {
+  border-left: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.forever-light .forever-show-desktop:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* ---- Tray arrow ---- */
+
+.forever-tray-button {
+  padding: 0 6px;
+  margin: 0 2px;
+}
+
+.forever-app-menu.forever-tray-menu .popup-menu-content {
+  min-width: 0;
+  padding: 4px;
+}
+
+.forever-tray-menu.forever-tray-list .popup-menu-item {
+  min-width: 180px;
+}
+
+.forever-tray-cell {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  padding: 0;
+}
+
+.forever-tray-cell:hover,
+.forever-tray-cell:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.forever-light .forever-tray-cell:hover,
+.forever-light .forever-tray-cell:focus {
+  background-color: rgba(0, 0, 0, 0.07);
+}
+
+/* ---- Right-click menus (Start button, taskbar apps, taskbar) ---- */
+
+.forever-winx-menu,
+.forever-app-menu {
+  -arrow-rise: 0px;
+  -arrow-base: 0px;
+  -boxpointer-gap: 6px;
+}
+
+.forever-winx-menu .popup-menu-content,
+.forever-app-menu .popup-menu-content {
+  min-width: 200px;
+  padding: 6px;
+  border-radius: 8px;
+  background-color: rgba(48, 48, 48, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.forever-winx-menu .popup-menu-item,
+.forever-app-menu .popup-menu-item {
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+/* =====================================================================
+   Light theme overrides
+   ===================================================================== */
+
+.forever-light .forever-panel {
+  background-color: rgba(243, 243, 243, 0.94);
+}
+
+.forever-light .forever-panel .panel-button,
+.forever-light .forever-clock-time,
+.forever-light .forever-start-button,
+.forever-light .forever-app-button {
+  color: #1b1b1b;
+}
+
+.forever-light .forever-clock-date {
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.forever-light .forever-start-button:hover,
+.forever-light .forever-app-button:hover {
+  background-color: rgba(0, 0, 0, 0.07);
+}
+
+.forever-light .forever-app-button.active {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.forever-light .forever-start-button.forever-start-highlight {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.forever-light .forever-start-button.forever-start-highlight:hover {
+  background-color: rgba(0, 0, 0, 0.17);
+}
+
+.forever-light .forever-taskbar-entry {
+  background-color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #1b1b1b;
+}
+
+.forever-light .forever-taskbar-entry:focus {
+  background-color: white;
+  border-bottom: 2px solid #0067c0;
+}
+
+.forever-light .forever-taskbar-entry-icon {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.forever-light .forever-tooltip {
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  color: #1b1b1b;
+}
+
+.forever-light .forever-start-menu .popup-menu-content {
+  background-color: rgba(243, 243, 243, 0.98);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.forever-light .forever-start,
+.forever-light .forever-section-title,
+.forever-light .forever-list-name,
+.forever-light .forever-user-name,
+.forever-light .forever-flyout-title,
+.forever-light .forever-letter {
+  color: #1b1b1b;
+}
+
+.forever-light .forever-search-area {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.forever-light .forever-search {
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid #0067c0;
+  color: #1b1b1b;
+}
+
+.forever-light .forever-search:focus {
+  background-color: white;
+}
+
+.forever-light .forever-search-icon {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.forever-light .forever-hint,
+.forever-light .forever-list-subtitle {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.forever-light .forever-view-dropdown {
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.forever-light .forever-view-dropdown:hover,
+.forever-light .forever-view-dropdown:focus {
+  background-color: rgba(0, 0, 0, 0.07);
+}
+
+.forever-light .forever-tile,
+.forever-light .forever-category,
+.forever-light .forever-list-item,
+.forever-light .forever-user,
+.forever-light .forever-power {
+  color: #1b1b1b;
+}
+
+.forever-light .forever-tile-label,
+.forever-light .forever-category-label {
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.forever-light .forever-tile:hover,
+.forever-light .forever-tile:focus,
+.forever-light .forever-category:hover,
+.forever-light .forever-category:focus,
+.forever-light .forever-list-item:hover,
+.forever-light .forever-list-item:focus,
+.forever-light .forever-user:hover,
+.forever-light .forever-user:focus,
+.forever-light .forever-power:hover,
+.forever-light .forever-power:focus {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.forever-light .forever-category-card {
+  background-color: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.forever-light .forever-footer {
+  background-color: rgba(232, 232, 232, 0.95);
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.forever-light .forever-avatar {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.forever-light .forever-flyout {
+  background-color: rgba(252, 252, 252, 0.99);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.forever-light .forever-flyout-item {
+  color: #1b1b1b;
+}
+
+.forever-light .forever-flyout-item:hover,
+.forever-light .forever-flyout-item:focus {
+  background-color: rgba(0, 0, 0, 0.07);
+}
+
+.forever-light .forever-flyout-separator {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.forever-light .forever-winx-menu .popup-menu-content,
+.forever-light .forever-app-menu .popup-menu-content {
+  background-color: rgba(252, 252, 252, 0.98);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.forever-light .forever-winx-menu .popup-menu-item,
+.forever-light .forever-app-menu .popup-menu-item,
+.forever-light .forever-winx-menu .popup-sub-menu .popup-menu-item,
+.forever-light .forever-app-menu .popup-separator-menu-item .popup-separator-menu-item-label {
+  color: #1b1b1b;
+}
+
+.forever-light .forever-winx-menu .popup-menu-item:hover,
+.forever-light .forever-app-menu .popup-menu-item:hover,
+.forever-light .forever-winx-menu .popup-menu-item:focus,
+.forever-light .forever-app-menu .popup-menu-item:focus {
+  background-color: rgba(0, 0, 0, 0.07);
+}

@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="4ever">
+  <schema id="org.gnome.shell.extensions.4ever" path="/org/gnome/shell/extensions/4ever/">
+
+    <!-- Taskbar -->
+    <key name="taskbar-height" type="i">
+      <range min="32" max="96"/>
+      <default>48</default>
+      <summary>Taskbar height in pixels</summary>
+    </key>
+    <key name="app-icon-size" type="i">
+      <range min="16" max="48"/>
+      <default>24</default>
+      <summary>Size of the app icons on the taskbar</summary>
+    </key>
+    <key name="search-mode" type="s">
+      <choices>
+        <choice value="hidden"/>
+        <choice value="icon"/>
+        <choice value="box"/>
+      </choices>
+      <default>'box'</default>
+      <summary>How the taskbar search is shown</summary>
+    </key>
+    <key name="search-width" type="i">
+      <range min="60" max="400"/>
+      <default>120</default>
+      <summary>Width of the taskbar search box in pixels</summary>
+    </key>
+    <key name="tray-view" type="s">
+      <choices>
+        <choice value="grid"/>
+        <choice value="list"/>
+      </choices>
+      <default>'grid'</default>
+      <summary>How tray apps are shown</summary>
+    </key>
+    <key name="tray-columns" type="i">
+      <range min="1" max="8"/>
+      <default>4</default>
+      <summary>Tray icons per row</summary>
+    </key>
+    <key name="tray-icon-size" type="i">
+      <range min="16" max="48"/>
+      <default>26</default>
+      <summary>Tray icon size</summary>
+    </key>
+    <key name="tray-spacing" type="i">
+      <range min="0" max="16"/>
+      <default>4</default>
+      <summary>Space between tray icons</summary>
+    </key>
+    <key name="skip-login-overview" type="b">
+      <default>true</default>
+      <summary>Go straight to the desktop after login</summary>
+    </key>
+    <key name="indicator-color" type="s">
+      <default>''</default>
+      <summary>Colour of the bar under running apps (empty = automatic)</summary>
+    </key>
+    <key name="panel-opacity" type="i">
+      <range min="0" max="100"/>
+      <default>92</default>
+      <summary>Taskbar opacity in percent</summary>
+    </key>
+    <key name="start-opacity" type="i">
+      <range min="0" max="100"/>
+      <default>97</default>
+      <summary>Start menu opacity in percent</summary>
+    </key>
+    <key name="tray-opacity" type="i">
+      <range min="0" max="100"/>
+      <default>98</default>
+      <summary>Hidden-icons box opacity in percent</summary>
+    </key>
+    <key name="icon-spacing" type="i">
+      <range min="0" max="24"/>
+      <default>4</default>
+      <summary>Space between taskbar icons</summary>
+    </key>
+    <key name="start-highlight" type="b">
+      <default>true</default>
+      <summary>Give the Start button its own background</summary>
+    </key>
+    <key name="show-desktop" type="b">
+      <default>true</default>
+      <summary>Show-desktop strip at the right end of the taskbar</summary>
+    </key>
+    <key name="fullscreen-reveal" type="b">
+      <default>true</default>
+      <summary>Show the taskbar over full-screen windows while Start is open</summary>
+    </key>
+    <key name="multi-monitor" type="b">
+      <default>false</default>
+      <summary>Taskbar on every monitor</summary>
+    </key>
+    <key name="mm-show-start" type="b">
+      <default>true</default>
+      <summary>Start button on other monitors</summary>
+    </key>
+    <key name="mm-show-apps" type="b">
+      <default>true</default>
+      <summary>App icons on other monitors</summary>
+    </key>
+    <key name="mm-show-tray" type="b">
+      <default>true</default>
+      <summary>Hidden-icons arrow on other monitors</summary>
+    </key>
+    <key name="mm-show-clock" type="b">
+      <default>true</default>
+      <summary>Clock on other monitors</summary>
+    </key>
+    <key name="mm-show-desktop" type="b">
+      <default>true</default>
+      <summary>Show-desktop strip on other monitors</summary>
+    </key>
+    <key name="mm-apps-mode" type="s">
+      <choices>
+        <choice value="monitor"/>
+        <choice value="all"/>
+      </choices>
+      <default>'monitor'</default>
+      <summary>Which apps other monitors show</summary>
+    </key>
+    <key name="hide-overview-dash" type="b">
+      <default>true</default>
+      <summary>Hide the app bar at the bottom of the overview</summary>
+    </key>
+    <key name="show-tray" type="b">
+      <default>true</default>
+      <summary>Show the tray arrow</summary>
+    </key>
+    <key name="show-task-view" type="b">
+      <default>true</default>
+      <summary>Show the Task view button</summary>
+    </key>
+    <key name="super-key" type="b">
+      <default>true</default>
+      <summary>Let the Super key open the Start menu instead of the overview</summary>
+    </key>
+    <key name="theme" type="s">
+      <choices>
+        <choice value="system"/>
+        <choice value="light"/>
+        <choice value="dark"/>
+      </choices>
+      <default>'system'</default>
+      <summary>Light or dark look</summary>
+    </key>
+
+    <!-- Start menu -->
+    <key name="start-icon-source" type="s">
+      <choices>
+        <choice value="os"/>
+        <choice value="custom"/>
+      </choices>
+      <default>'os'</default>
+      <summary>Where the Start button icon comes from</summary>
+    </key>
+    <key name="start-icon-path" type="s">
+      <default>''</default>
+      <summary>Path of a custom Start button image</summary>
+    </key>
+    <key name="show-pinned" type="b">
+      <default>true</default>
+      <summary>Show the Pinned section in Start</summary>
+    </key>
+    <key name="show-recommended" type="b">
+      <default>true</default>
+      <summary>Show the Recommended section in Start</summary>
+    </key>
+    <key name="all-view" type="s">
+      <choices>
+        <choice value="category"/>
+        <choice value="grid"/>
+        <choice value="list"/>
+      </choices>
+      <default>'category'</default>
+      <summary>How the All apps section is shown</summary>
+    </key>
+
+    <!-- Start menu layout -->
+    <key name="section-order" type="s">
+      <default>'all,recommended,pinned'</default>
+      <summary>Order of the Start menu sections, top to bottom</summary>
+      <description>A comma separated list of all, recommended and pinned.</description>
+    </key>
+    <key name="start-menu-width" type="i">
+      <range min="560" max="1000"/>
+      <default>720</default>
+      <summary>Width of the Start menu in pixels</summary>
+    </key>
+    <key name="start-menu-height" type="i">
+      <range min="320" max="800"/>
+      <default>520</default>
+      <summary>Height of the scrolling area of the Start menu in pixels</summary>
+    </key>
+    <key name="pinned-columns" type="i">
+      <range min="3" max="10"/>
+      <default>6</default>
+      <summary>Apps per row in Pinned and the Grid view</summary>
+    </key>
+    <key name="pinned-icon-size" type="i">
+      <range min="24" max="64"/>
+      <default>32</default>
+      <summary>Icon size in Pinned and the Grid view</summary>
+    </key>
+    <key name="category-align" type="s">
+      <choices>
+        <choice value="left"/>
+        <choice value="center"/>
+        <choice value="right"/>
+      </choices>
+      <default>'center'</default>
+      <summary>Where the category folders sit in the Start menu</summary>
+    </key>
+    <key name="category-columns" type="i">
+      <range min="2" max="8"/>
+      <default>4</default>
+      <summary>Category folders per row</summary>
+    </key>
+    <key name="category-size" type="i">
+      <range min="64" max="180"/>
+      <default>98</default>
+      <summary>Size of a category folder in pixels (it is square)</summary>
+    </key>
+    <key name="category-icon-size" type="i">
+      <range min="16" max="64"/>
+      <default>32</default>
+      <summary>Size of the icons inside a category folder</summary>
+    </key>
+    <key name="category-gap" type="i">
+      <range min="0" max="60"/>
+      <default>16</default>
+      <summary>Horizontal space between category folders</summary>
+    </key>
+    <key name="category-row-gap" type="i">
+      <range min="0" max="60"/>
+      <default>8</default>
+      <summary>Vertical space between rows of category folders</summary>
+    </key>
+
+    <!-- Clock -->
+    <key name="clock-layout" type="s">
+      <choices>
+        <choice value="stacked"/>
+        <choice value="inline"/>
+        <choice value="time"/>
+      </choices>
+      <default>'stacked'</default>
+      <summary>Clock layout</summary>
+    </key>
+    <key name="clock-time-format" type="s">
+      <choices>
+        <choice value="system"/>
+        <choice value="12h"/>
+        <choice value="24h"/>
+      </choices>
+      <default>'system'</default>
+      <summary>12 or 24 hour time</summary>
+    </key>
+    <key name="clock-seconds" type="b">
+      <default>false</default>
+      <summary>Show seconds</summary>
+    </key>
+    <key name="clock-date-format" type="s">
+      <choices>
+        <choice value="system"/>
+        <choice value="iso"/>
+        <choice value="dmy"/>
+        <choice value="mdy"/>
+        <choice value="long"/>
+      </choices>
+      <default>'system'</default>
+      <summary>Date format</summary>
+    </key>
+    <key name="clock-timezone" type="s">
+      <default>''</default>
+      <summary>Time zone for the clock, empty for the system time zone</summary>
+    </key>
+
+  </schema>
+</schemalist>

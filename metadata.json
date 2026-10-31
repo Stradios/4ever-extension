@@ -1,0 +1,9 @@
+{
+  "uuid": "4ever@4ever-extension.stradios",
+  "name": "4ever",
+  "description": "A bottom taskbar with a centered Start menu, search, hidden-icons tray, clock and notifications. Everything is configurable in the extension settings.",
+  "shell-version": ["50", "51"],
+  "version": 1,
+  "url": "https://github.com/Stradios/4ever-extension",
+  "settings-schema": "org.gnome.shell.extensions.4ever"
+}
