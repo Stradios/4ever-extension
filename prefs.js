@@ -200,13 +200,13 @@ export default class ForeverPreferences extends ExtensionPreferences {
         });
         const resetButton = new Gtk.Button({
             icon_name: 'edit-clear-symbolic',
-            tooltip_text: 'Go back to the distribution logo',
+            tooltip_text: 'Go back to the 4ever icon',
             valign: Gtk.Align.CENTER,
         });
         resetButton.add_css_class('flat');
         resetButton.connect('clicked', () => {
             settings.set_string('start-icon-path', '');
-            settings.set_string('start-icon-source', 'os');
+            settings.set_string('start-icon-source', 'pack');
         });
         iconRow.add_suffix(chooseButton);
         iconRow.add_suffix(resetButton);
@@ -295,9 +295,17 @@ export default class ForeverPreferences extends ExtensionPreferences {
 
         page('Start menu', 'view-app-grid-symbolic', [
             group('Start button', null, [
-                comboRow('Icon', 'The distribution logo is picked up automatically.', 'start-icon-source', [
+                comboRow('Icon', 'The 4ever icon, your distribution\u2019s logo (picked up automatically), or your own image.', 'start-icon-source', [
+                    ['pack', '4ever icon'],
                     ['os', 'Distribution logo'],
                     ['custom', 'Custom image'],
+                ]),
+                comboRow('4ever icon style', 'Used for the Start button, the search icon and Task view.', 'icon-style', [
+                    ['transparent', 'Transparent'],
+                    ['dark', 'Dark'],
+                    ['light', 'Light'],
+                    ['ember', 'Ember'],
+                    ['auto', 'Match the theme'],
                 ]),
                 iconRow,
             ]),

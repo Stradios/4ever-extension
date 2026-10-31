@@ -149,12 +149,24 @@
     </key>
 
     <!-- Start menu -->
+    <key name="icon-style" type="s">
+      <choices>
+        <choice value="transparent"/>
+        <choice value="dark"/>
+        <choice value="light"/>
+        <choice value="ember"/>
+        <choice value="auto"/>
+      </choices>
+      <default>'transparent'</default>
+      <summary>Look of the bundled icons</summary>
+    </key>
     <key name="start-icon-source" type="s">
       <choices>
+        <choice value="pack"/>
         <choice value="os"/>
         <choice value="custom"/>
       </choices>
-      <default>'os'</default>
+      <default>'pack'</default>
       <summary>Where the Start button icon comes from</summary>
     </key>
     <key name="start-icon-path" type="s">

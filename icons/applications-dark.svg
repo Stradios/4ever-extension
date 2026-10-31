@@ -1,0 +1,19 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="bg-a-dark" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A5BA8"/><stop offset="1" stop-color="#1C2547"/></linearGradient><radialGradient id="glow-dark" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#FFB066" stop-opacity="0.9"/><stop offset="1" stop-color="#FF7A1A" stop-opacity="0"/></radialGradient></defs>
+  <rect x="16" y="16" width="224" height="224" rx="56" fill="url(#bg-a-dark)"/>
+  <circle cx="52" cy="52" r="2.5" fill="#FFFFFF" opacity="0.5"/><circle cx="208" cy="48" r="2" fill="#FFFFFF" opacity="0.4"/><circle cx="222" cy="200" r="2.5" fill="#FFFFFF" opacity="0.35"/>
+  <circle cx="128" cy="128" r="62" fill="url(#glow-dark)"/>
+  <g>
+    <rect x="46" y="46" width="52" height="52" rx="16" fill="#EDEDED"/>
+    <rect x="102" y="46" width="52" height="52" rx="16" fill="#EDEDED"/>
+    <rect x="158" y="46" width="52" height="52" rx="16" fill="#EDEDED"/>
+    <rect x="46" y="102" width="52" height="52" rx="16" fill="#EDEDED"/>
+    <rect x="102" y="102" width="52" height="52" rx="16" fill="#FF7A1A"/>
+    <rect x="158" y="102" width="52" height="52" rx="16" fill="#EDEDED"/>
+    <rect x="46" y="158" width="52" height="52" rx="16" fill="#EDEDED"/>
+    <rect x="102" y="158" width="52" height="52" rx="16" fill="#EDEDED"/>
+    <rect x="158" y="158" width="52" height="52" rx="16" fill="#EDEDED"/>
+    <path d="M128 114 c1.5 8 5 11.5 13 13 -8 1.5 -11.5 5 -13 13 -1.5 -8 -5 -11.5 -13 -13 8 -1.5 11.5 -5 13 -13z" fill="white"/>
+    <circle cx="141" cy="139" r="3.5" fill="white" opacity="0.9"/>
+  </g>
+</svg>

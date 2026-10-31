@@ -26,6 +26,8 @@ Works with GNOME Shell 50 and 51. Not affiliated with, or derived from, any othe
 - **Multiple monitors**: an optional taskbar on every monitor, with separate switches for what it shows.
 - **Clock** layout, time zone and formats; light, dark or system theme; independent transparency for the
   taskbar, the Start menu and the tray box; taskbar height, icon size and spacing.
+- Bundled icon set for the Start button, search and Task view in transparent, dark, light or ember styles
+  (transparent is the default), or use your distribution's logo or your own image for Start.
 - Skips GNOME's overview after login and can hide the dash in Task view.
 
 ## Upcoming features

@@ -372,6 +372,8 @@ export default class Forever extends Extension {
         if (this._taskbar) {
             this._applyOpacity();
             this._rebuildApps();
+            if (this._gs.get_string('icon-style') === 'auto')
+                this._refreshPackIcons();
         }
     }
 
@@ -801,17 +803,59 @@ export default class Forever extends Extension {
             view.scroll.style = `height: ${height}px;`;
     }
 
+    // Which version of the bundled icons to use: transparent, dark, light, ember
+    // or "auto" (dark or light to match the theme)
+    _iconStyle() {
+        const style = this._gs.get_string('icon-style');
+        if (style === 'auto')
+            return Main.uiGroup.has_style_class_name('forever-light') ? 'light' : 'dark';
+        return style;
+    }
+
+    // One of the bundled icons: 'applications', 'launcher' or 'workspaces'
+    _packIcon(name) {
+        const file = GLib.build_filenamev([this.path, 'icons', `${name}-${this._iconStyle()}.svg`]);
+        return Gio.FileIcon.new(Gio.File.new_for_path(file));
+    }
+
     _startGicon() {
-        if (this._gs.get_string('start-icon-source') === 'custom') {
+        const source = this._gs.get_string('start-icon-source');
+        if (source === 'custom') {
             const path = this._gs.get_string('start-icon-path');
             if (path && GLib.file_test(path, GLib.FileTest.EXISTS))
                 return Gio.FileIcon.new(Gio.File.new_for_path(path));
         }
-        return this._osLogoIcon();
+        if (source === 'os')
+            return this._osLogoIcon();
+        return this._packIcon('applications');
+    }
+
+    // Put the bundled icons back after the icon style or the theme changed
+    _refreshPackIcons() {
+        if (!this._taskbar)
+            return;
+        if (this._startIcon) {
+            this._startIcon.gicon = this._startGicon();
+            this._startIcon.icon_size = this._startIconSize();
+        }
+        if (this._taskViewButton?.child) {
+            this._taskViewButton.child.gicon = this._packIcon('workspaces');
+            this._taskViewButton.child.icon_size = this._packSize(22);
+        }
+        this._applySearchMode();
+        this._rebuildBars();
     }
 
     _startIconSize() {
-        return Math.max(16, this._gs.get_int('app-icon-size') - 2);
+        const base = Math.max(16, this._gs.get_int('app-icon-size') - 2);
+        // The bundled icons have some empty space around them, so draw them a bit larger
+        if (this._gs.get_string('start-icon-source') === 'pack')
+            return this._packSize(base);
+        return base;
+    }
+
+    _packSize(base) {
+        return Math.max(16, Math.min(base + 6, this._gs.get_int('taskbar-height') - 12));
     }
 
     // background-color with the chosen opacity, in the colours of the current theme
@@ -963,9 +1007,8 @@ export default class Forever extends Extension {
             break;
         case 'start-icon-source':
         case 'start-icon-path':
-            if (this._startIcon)
-                this._startIcon.gicon = this._startGicon();
-            this._rebuildBars();
+        case 'icon-style':
+            this._refreshPackIcons();
             break;
         case 'super-key':
             this._overrideOverlayKey();
@@ -1730,7 +1773,7 @@ export default class Forever extends Extension {
     _buildTaskbarExtras() {
         this._taskViewButton = new St.Button({
             style_class: 'forever-app-button',
-            child: new St.Icon({icon_name: 'focus-windows-symbolic', icon_size: 20}),
+            child: new St.Icon({gicon: this._packIcon('workspaces'), icon_size: this._packSize(22)}),
             can_focus: true,
             reactive: true,
         });
@@ -1755,7 +1798,7 @@ export default class Forever extends Extension {
         if (mode === 'icon') {
             widget = new St.Button({
                 style_class: 'forever-app-button',
-                child: new St.Icon({icon_name: 'edit-find-symbolic', icon_size: 18}),
+                child: new St.Icon({gicon: this._packIcon('launcher'), icon_size: this._packSize(22)}),
                 can_focus: true,
                 reactive: true,
             });
