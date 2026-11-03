@@ -292,6 +292,8 @@ export default class Forever extends Extension {
             GLib.source_remove(id);
         this._layoutTimers = [];
         this._restoreOverlayKey();
+        this._unwatchTaskbarClicks();
+        this._hidePreview();
         this._unwatchSuperKey();
         this._teardownBars();
         this._showDesktopButton?.destroy();
@@ -838,24 +840,36 @@ export default class Forever extends Extension {
             this._startIcon.gicon = this._startGicon();
             this._startIcon.icon_size = this._startIconSize();
         }
+        if (this._startButton)
+            this._startButton.style = this._buttonStyle('start-icon-spacing');
         if (this._taskViewButton?.child) {
             this._taskViewButton.child.gicon = this._packIcon('workspaces');
-            this._taskViewButton.child.icon_size = this._packSize(22);
+            this._taskViewButton.child.icon_size = this._gs.get_int('taskview-icon-size');
+            this._taskViewButton.style = this._buttonStyle('taskview-icon-spacing');
         }
         this._applySearchMode();
         this._rebuildBars();
     }
 
     _startIconSize() {
-        const base = Math.max(16, this._gs.get_int('app-icon-size') - 2);
-        // The bundled icons have some empty space around them, so draw them a bit larger
-        if (this._gs.get_string('start-icon-source') === 'pack')
-            return this._packSize(base);
-        return base;
+        return this._gs.get_int('start-icon-size');
     }
 
-    _packSize(base) {
-        return Math.max(16, Math.min(base + 6, this._gs.get_int('taskbar-height') - 12));
+    // Space on each side of one of the fixed buttons (Start, search, Task view)
+    _buttonStyle(key) {
+        return `padding: 6px ${this._gs.get_int(key)}px;`;
+    }
+
+    // Space on each side of an app icon. A negative "space between icons" also
+    // trims this, so icons can sit closer together than their default padding.
+    _appPadX(iconSize) {
+        const gap = this._gs.get_int('icon-spacing');
+        const base = Math.round(iconSize * 0.42);
+        return gap < 0 ? Math.max(0, base + Math.round(gap / 2)) : base;
+    }
+
+    _containerSpacing() {
+        return Math.max(0, this._gs.get_int('icon-spacing'));
     }
 
     // background-color with the chosen opacity, in the colours of the current theme
@@ -880,7 +894,7 @@ export default class Forever extends Extension {
     _applyTaskbarLook() {
         if (!this._taskbar)
             return;
-        const spacing = `spacing: ${this._gs.get_int('icon-spacing')}px;`;
+        const spacing = `spacing: ${this._containerSpacing()}px;`;
         this._taskbar.style = spacing;
         const highlight = this._gs.get_boolean('start-highlight');
         const buttons = [this._startButton, ...this._bars.map(bar => bar.startButton)];
@@ -1020,8 +1034,19 @@ export default class Forever extends Extension {
             this._applyOpacity();
             break;
         case 'icon-spacing':
+            this._applyTaskbarLook();
+            this._rebuildApps();
+            break;
         case 'start-highlight':
             this._applyTaskbarLook();
+            break;
+        case 'start-icon-size':
+        case 'start-icon-spacing':
+        case 'search-icon-size':
+        case 'search-icon-spacing':
+        case 'taskview-icon-size':
+        case 'taskview-icon-spacing':
+            this._refreshPackIcons();
             break;
         case 'indicator-color':
             this._rebuildApps();
@@ -1117,6 +1142,7 @@ export default class Forever extends Extension {
         this._startIcon = new St.Icon({gicon: this._startGicon(), icon_size: this._startIconSize()});
         this._startButton = new St.Button({
             style_class: 'forever-start-button',
+            style: this._buttonStyle('start-icon-spacing'),
             child: this._startIcon,
             reactive: true,
             can_focus: true,
@@ -1231,9 +1257,11 @@ export default class Forever extends Extension {
                 this._revealPanels(true);
                 this._onMenuOpened();
                 this._watchSuperKey();
+                this._watchTaskbarClicks();
             } else {
                 this._startClosedAt = nowMs();
                 this._unwatchSuperKey();
+                this._unwatchTaskbarClicks();
                 this._revealPanels(false);
             }
         });
@@ -1712,6 +1740,7 @@ export default class Forever extends Extension {
         if (this._gs.get_boolean('mm-show-start')) {
             bar.startButton = new St.Button({
                 style_class: 'forever-start-button',
+                style: this._buttonStyle('start-icon-spacing'),
                 child: new St.Icon({gicon: this._startGicon(), icon_size: this._startIconSize()}),
                 reactive: true,
                 can_focus: true,
@@ -1774,7 +1803,8 @@ export default class Forever extends Extension {
     _buildTaskbarExtras() {
         this._taskViewButton = new St.Button({
             style_class: 'forever-app-button',
-            child: new St.Icon({gicon: this._packIcon('workspaces'), icon_size: this._packSize(22)}),
+            child: new St.Icon({gicon: this._packIcon('workspaces'), icon_size: this._gs.get_int('taskview-icon-size')}),
+            style: this._buttonStyle('taskview-icon-spacing'),
             can_focus: true,
             reactive: true,
         });
@@ -1799,7 +1829,8 @@ export default class Forever extends Extension {
         if (mode === 'icon') {
             widget = new St.Button({
                 style_class: 'forever-app-button',
-                child: new St.Icon({gicon: this._packIcon('launcher'), icon_size: this._packSize(22)}),
+                child: new St.Icon({gicon: this._packIcon('launcher'), icon_size: this._gs.get_int('search-icon-size')}),
+                style: this._buttonStyle('search-icon-spacing'),
                 can_focus: true,
                 reactive: true,
             });
@@ -2395,9 +2426,14 @@ export default class Forever extends Extension {
         return entries;
     }
 
+    // From the Start menu an app opens a new window when it can. Raising a
+    // window that is already open is what the taskbar buttons are for.
     _launch(app) {
         this._menu.close();
-        app.activate();
+        if (app.state === Shell.AppState.RUNNING && app.can_open_new_window())
+            app.open_new_window(-1);
+        else
+            app.activate();
     }
 
     // --- Search ------------------------------------------------------
@@ -2872,6 +2908,220 @@ export default class Forever extends Extension {
         return list.filter(app => app.get_windows().some(w => w.get_monitor() === monitorIndex));
     }
 
+    _appWindows(app, monitorIndex) {
+        const windows = app.get_windows().filter(w => !w.skip_taskbar);
+        if (monitorIndex === null || monitorIndex === undefined)
+            return windows;
+        const here = windows.filter(w => w.get_monitor() === monitorIndex);
+        return here.length > 0 ? here : windows;
+    }
+
+    // A click on a taskbar button raises the app's window. It never starts a
+    // new one; only the Start menu and the right-click menu do that.
+    _taskbarActivate(app, monitorIndex) {
+        this._hidePreview();
+        const windows = this._appWindows(app, monitorIndex);
+        if (windows.length === 0) {
+            app.activate();
+            return;
+        }
+        if (windows.length > 1) {
+            // Several windows: cycle through them, most recently used first
+            const focusIndex = windows.findIndex(w => w.has_focus());
+            if (focusIndex < 0 || windows[focusIndex].minimized) {
+                Main.activateWindow(windows[focusIndex < 0 ? 0 : focusIndex]);
+            } else {
+                Main.activateWindow(windows[(focusIndex + 1) % windows.length]);
+            }
+            return;
+        }
+        const target = windows[0];
+        if (target.has_focus() && !target.minimized)
+            target.minimize();
+        else
+            Main.activateWindow(target);
+    }
+
+    // --- Hover preview: a card per window above the button ------------
+
+    _attachPreview(btn, app, monitorIndex) {
+        btn.connect('notify::hover', () => {
+            if (btn.hover) {
+                this._cancelPreviewHide();
+                this._hideTooltip();
+                if (this._preview && this._previewOwner === btn)
+                    return;
+                if (this._previewTimer)
+                    GLib.source_remove(this._previewTimer);
+                const delay = this._preview ? 80 : 450;
+                this._previewTimer = GLib.timeout_add(GLib.PRIORITY_DEFAULT, delay, () => {
+                    this._previewTimer = 0;
+                    this._showPreview(btn, app, monitorIndex);
+                    return GLib.SOURCE_REMOVE;
+                });
+            } else {
+                if (this._previewTimer) {
+                    GLib.source_remove(this._previewTimer);
+                    this._previewTimer = 0;
+                }
+                this._schedulePreviewHide();
+            }
+        });
+        btn.connect('destroy', () => {
+            if (this._previewOwner === btn)
+                this._hidePreview();
+        });
+    }
+
+    _schedulePreviewHide() {
+        this._cancelPreviewHide();
+        this._previewHideTimer = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 250, () => {
+            this._previewHideTimer = 0;
+            this._hidePreview();
+            return GLib.SOURCE_REMOVE;
+        });
+    }
+
+    _cancelPreviewHide() {
+        if (this._previewHideTimer) {
+            GLib.source_remove(this._previewHideTimer);
+            this._previewHideTimer = 0;
+        }
+    }
+
+    _hidePreview() {
+        if (this._previewTimer) {
+            GLib.source_remove(this._previewTimer);
+            this._previewTimer = 0;
+        }
+        this._cancelPreviewHide();
+        this._preview?.destroy();
+        this._preview = null;
+        this._previewOwner = null;
+    }
+
+    _showPreview(btn, app, monitorIndex) {
+        if (!btn.get_stage() || !btn.hover || this._menu?.isOpen)
+            return;
+        const windows = this._appWindows(app, monitorIndex);
+        if (windows.length === 0) {
+            this._showTooltip(btn, app.get_name());
+            return;
+        }
+        this._hidePreview();
+        this._hideTooltip();
+
+        const row = new St.BoxLayout({style_class: 'forever-preview', reactive: true, track_hover: true});
+        row.connect('notify::hover', () => {
+            if (row.hover)
+                this._cancelPreviewHide();
+            else
+                this._schedulePreviewHide();
+        });
+
+        const maxW = 220;
+        const maxH = 140;
+        for (const win of windows.slice(0, 6)) {
+            const card = new St.BoxLayout({
+                orientation: Clutter.Orientation.VERTICAL,
+                style_class: 'forever-preview-card',
+                reactive: true,
+                track_hover: true,
+                can_focus: true,
+            });
+
+            const head = new St.BoxLayout({style_class: 'forever-preview-head'});
+            head.add_child(new St.Icon({gicon: app.get_icon(), icon_size: 16, y_align: Clutter.ActorAlign.CENTER}));
+            const title = new St.Label({
+                text: win.get_title() || app.get_name(),
+                style_class: 'forever-preview-title',
+                x_expand: true,
+                y_align: Clutter.ActorAlign.CENTER,
+            });
+            title.clutter_text.ellipsize = 3; // Pango.EllipsizeMode.END
+            head.add_child(title);
+            const close = new St.Button({
+                style_class: 'forever-preview-close',
+                child: new St.Icon({icon_name: 'window-close-symbolic', icon_size: 12}),
+                reactive: true,
+                can_focus: true,
+            });
+            close.connect('clicked', () => {
+                win.delete(global.get_current_time());
+                this._hidePreview();
+            });
+            head.add_child(close);
+            card.add_child(head);
+
+            const thumb = new St.Bin({style_class: 'forever-preview-thumb', x_align: Clutter.ActorAlign.CENTER});
+            const actor = win.get_compositor_private();
+            if (actor) {
+                const [aw, ah] = actor.get_size();
+                const scale = Math.min(maxW / Math.max(aw, 1), maxH / Math.max(ah, 1), 1);
+                const clone = new Clutter.Clone({source: actor});
+                clone.set_size(Math.max(1, Math.round(aw * scale)), Math.max(1, Math.round(ah * scale)));
+                thumb.set_child(clone);
+                thumb.set_size(maxW, maxH);
+            }
+            card.add_child(thumb);
+
+            card.connect('button-press-event', (_a, event) => {
+                const mouseButton = event.get_button();
+                if (mouseButton === 2)
+                    win.delete(global.get_current_time());
+                else
+                    Main.activateWindow(win);
+                this._hidePreview();
+                return Clutter.EVENT_STOP;
+            });
+            row.add_child(card);
+        }
+
+        Main.uiGroup.add_child(row);
+        const [bx, by] = btn.get_transformed_position();
+        const [, rw] = row.get_preferred_width(-1);
+        const [, rh] = row.get_preferred_height(rw);
+        const monitor = Main.layoutManager.findMonitorForActor(btn) ?? Main.layoutManager.primaryMonitor;
+        let x = Math.round(bx + btn.width / 2 - rw / 2);
+        x = Math.max(monitor.x + 8, Math.min(x, monitor.x + monitor.width - rw - 8));
+        row.set_position(x, Math.round(by - rh - 8));
+        this._preview = row;
+        this._previewOwner = btn;
+    }
+
+    // While Start is open the menu holds the pointer, so a click on a taskbar
+    // button is swallowed and only closes the menu. Catch that click first,
+    // close Start and raise the window the user asked for.
+    _watchTaskbarClicks() {
+        this._unwatchTaskbarClicks();
+        this._taskbarClickId = global.stage.connect('captured-event', (_stage, event) => {
+            if (event.type() !== Clutter.EventType.BUTTON_PRESS || event.get_button() !== 1)
+                return Clutter.EVENT_PROPAGATE;
+            let actor = event.get_source();
+            while (actor && !actor._foreverApp)
+                actor = actor.get_parent();
+            if (!actor)
+                return Clutter.EVENT_PROPAGATE;
+            const {_foreverApp: app, _foreverMonitor: monitorIndex} = actor;
+            defer(() => {
+                this._menu?.isOpen && this._menu.close();
+                // The windows must be raised after the menu released its grab
+                GLib.timeout_add(GLib.PRIORITY_DEFAULT, 60, () => {
+                    this._taskbarActivate(app, monitorIndex);
+                    return GLib.SOURCE_REMOVE;
+                });
+            });
+            return Clutter.EVENT_STOP;
+        });
+    }
+
+    _unwatchTaskbarClicks() {
+        if (this._taskbarClickId) {
+            global.stage.disconnect(this._taskbarClickId);
+            this._taskbarClickId = 0;
+        }
+    }
+
     _makeAppButton(app, focused, monitorIndex) {
         const running = app.state === Shell.AppState.RUNNING;
         let styleClass = 'forever-app-button';
@@ -2896,44 +3146,49 @@ export default class Forever extends Extension {
             y_align: Clutter.ActorAlign.START,
         }));
         if (running) {
-            const bar = new St.Widget({
+            const count = Math.min(4, this._appWindows(app, monitorIndex).length);
+            const marks = new St.BoxLayout({
                 x_expand: true,
                 y_expand: true,
                 x_align: Clutter.ActorAlign.CENTER,
                 y_align: Clutter.ActorAlign.END,
-                style: `width: ${isActive ? 18 : 6}px; height: 3px; border-radius: 2px; ` +
-                    `background-color: ${this._indicatorColor()};`,
+                style: 'spacing: 3px;',
             });
-            bar.opacity = isActive ? 255 : 150;
-            content.add_child(bar);
+            // One mark per window (up to four), so several windows of one app show
+            const n = Math.max(1, count);
+            for (let i = 0; i < n; i++) {
+                const wide = isActive && n === 1 ? 18 : (n > 1 ? (isActive && i === 0 ? 12 : 6) : 6);
+                const mark = new St.Widget({
+                    style: `width: ${wide}px; height: 3px; border-radius: 2px; ` +
+                        `background-color: ${this._indicatorColor()};`,
+                });
+                mark.opacity = isActive && (n === 1 || i === 0) ? 255 : 150;
+                marks.add_child(mark);
+            }
+            content.add_child(marks);
         }
         const btn = new St.Button({
             style_class: styleClass,
-            style: `padding: 3px ${Math.round(iconSize * 0.42)}px;`,
+            style: `padding: 3px ${this._appPadX(iconSize)}px;`,
             child: content,
             reactive: true,
             can_focus: true,
             button_mask: St.ButtonMask.ONE | St.ButtonMask.THREE,
         });
+        btn._foreverApp = app;
+        btn._foreverMonitor = monitorIndex;
         btn.connect('clicked', (_b, mouseButton) => {
             if (mouseButton === 3) {
+                this._hidePreview();
                 this._showAppMenu(btn, app);
                 return;
             }
-            const windows = app.get_windows();
-            if (windows.length === 0) {
-                app.activate();
-                return;
-            }
-            const target = (monitorIndex !== null
-                ? windows.find(w => w.get_monitor() === monitorIndex)
-                : null) ?? windows[0];
-            if (target.has_focus() && !target.minimized)
-                target.minimize();
-            else
-                Main.activateWindow(target);
+            this._taskbarActivate(app, monitorIndex);
         });
-        this._attachTooltip(btn, app.get_name());
+        if (running)
+            this._attachPreview(btn, app, monitorIndex);
+        else
+            this._attachTooltip(btn, app.get_name());
         return btn;
     }
 

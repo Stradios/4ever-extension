@@ -650,3 +650,70 @@
 .forever-light .forever-app-menu .popup-menu-item:focus {
   background-color: rgba(0, 0, 0, 0.07);
 }
+
+/* ---- Hover preview above a taskbar button ---- */
+
+.forever-preview {
+  spacing: 6px;
+  padding: 8px;
+  border-radius: 10px;
+  background-color: rgba(44, 44, 44, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.forever-preview-card {
+  padding: 6px;
+  border-radius: 8px;
+  spacing: 6px;
+  width: 232px;
+}
+
+.forever-preview-card:hover,
+.forever-preview-card:focus {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.forever-preview-head {
+  spacing: 6px;
+}
+
+.forever-preview-title {
+  color: white;
+  font-size: 12px;
+}
+
+.forever-preview-close {
+  padding: 3px;
+  border-radius: 6px;
+  color: white;
+}
+
+.forever-preview-close:hover,
+.forever-preview-close:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.forever-preview-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.forever-light .forever-preview {
+  background-color: rgba(250, 250, 250, 0.98);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.forever-light .forever-preview-card:hover,
+.forever-light .forever-preview-card:focus {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.forever-light .forever-preview-title,
+.forever-light .forever-preview-close {
+  color: #1b1b1b;
+}
+
+.forever-light .forever-preview-close:hover,
+.forever-light .forever-preview-close:focus {
+  background-color: rgba(0, 0, 0, 0.12);
+}

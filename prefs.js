@@ -119,7 +119,15 @@ export default class ForeverPreferences extends ExtensionPreferences {
             group('Size', null, [
                 spinRow('Taskbar height', 'In pixels. The default is 48.', 'taskbar-height', 32, 96, 2),
                 spinRow('App icon size', 'Size of the icons on the taskbar, in pixels.', 'app-icon-size', 16, 48, 2),
-                spinRow('Space between icons', 'In pixels.', 'icon-spacing', 0, 24, 1),
+                spinRow('Space between icons', 'In pixels. Below zero the app icons move closer together.', 'icon-spacing', -20, 24, 1),
+            ]),
+            group('Start, search and Task view icons', 'Size of each icon and the space on each side of it, in pixels.', [
+                spinRow('Start icon size', null, 'start-icon-size', 16, 64, 2),
+                spinRow('Start icon spacing', null, 'start-icon-spacing', 0, 30, 1),
+                spinRow('Search icon size', 'Used when search is set to icon only.', 'search-icon-size', 16, 64, 2),
+                spinRow('Search icon spacing', null, 'search-icon-spacing', 0, 30, 1),
+                spinRow('Task view icon size', null, 'taskview-icon-size', 16, 64, 2),
+                spinRow('Task view icon spacing', null, 'taskview-icon-spacing', 0, 30, 1),
             ]),
             group('Look', null, [
                 colorRow,
@@ -414,5 +422,78 @@ export default class ForeverPreferences extends ExtensionPreferences {
                 ]),
             ]),
         ]);
+
+        // ---------------- About ----------------
+        {
+            const DONATE_URL = '';   // put a donation link here to show the button
+            const GITHUB_URL = 'https://github.com/Stradios';
+            const REPO_URL = 'https://github.com/Stradios/4ever-extension';
+
+            const p = new Adw.PreferencesPage({title: 'About', icon_name: 'help-about-symbolic'});
+
+            const styleManager = Adw.StyleManager.get_default();
+            const lockupFile = () => Gio.File.new_for_path(GLib.build_filenamev(
+                [this.path, 'icons', styleManager.dark ? '4ever-lockup-darkbg.svg' : '4ever-lockup-light.svg']));
+            const banner = new Gtk.Picture({
+                file: lockupFile(),
+                content_fit: Gtk.ContentFit.CONTAIN,
+                can_shrink: true,
+                height_request: 130,
+                margin_top: 12,
+                margin_bottom: 6,
+            });
+            // Swap the banner as soon as the system style changes, even with this window open
+            const styleId = styleManager.connect('notify::dark', () => {
+                banner.file = lockupFile();
+            });
+            banner.connect('destroy', () => styleManager.disconnect(styleId));
+            const bannerGroup = new Adw.PreferencesGroup();
+            bannerGroup.add(banner);
+            p.add(bannerGroup);
+
+            const linkRow = (title, subtitle, url, icon = 'adw-external-link-symbolic') => {
+                const row = new Adw.ActionRow({title, subtitle, activatable: true});
+                row.add_suffix(new Gtk.Image({icon_name: icon}));
+                row.connect('activated', () => Gtk.show_uri(window, url, Gdk.CURRENT_TIME));
+                return row;
+            };
+            const textRow = (title, text) => {
+                const row = new Adw.ActionRow({title, subtitle: text, subtitle_lines: 0, title_lines: 0});
+                row.set_activatable(false);
+                return row;
+            };
+
+            const version = this.metadata['version-name'] ?? '';
+            const links = [
+                linkRow('Stradios on GitHub', GITHUB_URL, GITHUB_URL),
+                linkRow('Source code and bug reports', REPO_URL, REPO_URL),
+            ];
+            if (DONATE_URL)
+                links.push(linkRow('Support the project', 'Donations are welcome and never expected.', DONATE_URL));
+            p.add(group(`4ever ${version}`, 'A Windows-style desktop for GNOME Shell.', links));
+
+            p.add(group('How this came to be', null, [
+                textRow('The idea',
+                    '4ever started as a personal wish: a familiar bottom taskbar, a centered Start menu and a ' +
+                    'tidy tray on GNOME, without giving up what makes GNOME good. It grew one fix at a time, ' +
+                    'tested on real machines and shaped by the feedback of its owner.'),
+                textRow('Made with an AI assistant',
+                    'This extension was created with the help of Claude, an AI assistant made by Anthropic. ' +
+                    'The design, testing and direction are by the repository owner.'),
+            ]));
+
+            p.add(group('Good to know', null, [
+                textRow('No warranty',
+                    'Released under GPL-3.0-or-later, without any warranty. Review the code before relying on it.'),
+                textRow('Not affiliated',
+                    '4ever imitates a familiar layout only. It is not made, endorsed or supported by Microsoft, ' +
+                    'GNOME or Anthropic. Names belong to their owners.'),
+                textRow('Shell updates',
+                    'It uses parts of GNOME Shell that are not a stable interface, so a GNOME update can break it. ' +
+                    'Turn it off in the extension manager to get the normal desktop back.'),
+            ]));
+
+            window.add(p);
+        }
     }
 }

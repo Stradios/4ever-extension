@@ -1,23 +1,2 @@
-<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- transparent: same x/y/w/h as workspaces-dark, navy keyline added, no tile -->
-  <g>
-    <rect x="76" y="46" width="132" height="96" rx="18" fill="#7C96D6" stroke="#1C2547" stroke-width="6"/>
-    <path d="M76 64 v-2 a18 18 0 0 1 18 -18 h96 a18 18 0 0 1 18 18 v2 z" fill="#C96A1F"/>
-    <rect x="76" y="60" width="132" height="14" fill="#C96A1F"/>
-  </g>
-  <g>
-    <rect x="44" y="96" width="168" height="112" rx="20" fill="#F2F2F2" stroke="#1C2547" stroke-width="6"/>
-    <path d="M44 116 v-0 a20 20 0 0 1 20 -20 h128 a20 20 0 0 1 20 20 v0 z" fill="#FF7A1A"/>
-    <rect x="44" y="112" width="168" height="16" fill="#FF7A1A"/>
-    <circle cx="62" cy="106" r="5" fill="white" opacity="0.9"/>
-    <circle cx="78" cy="106" r="5" fill="white" opacity="0.55"/>
-    <circle cx="94" cy="106" r="5" fill="white" opacity="0.35"/>
-    <rect x="62" y="144" width="88" height="10" rx="5" fill="#2B4776" opacity="0.18"/>
-    <rect x="62" y="162" width="132" height="10" rx="5" fill="#2B4776" opacity="0.12"/>
-    <rect x="62" y="180" width="72" height="10" rx="5" fill="#2B4776" opacity="0.12"/>
-  </g>
-  <g>
-    <rect x="96" y="220" width="24" height="8" rx="4" fill="#9AA3BD" stroke="#1C2547" stroke-width="3"/>
-    <rect x="124" y="220" width="36" height="8" rx="4" fill="#FF7A1A" stroke="#1C2547" stroke-width="3"/>
-  </g>
-</svg>
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="34.8696 34 186.2609 204.0001" width="212.87px" height="233.143px" preserveAspectRatio="none" xmlns:bx="https://boxy-svg.com"><defs><bx:export><bx:file format="svg"/></bx:export></defs><g style="" transform="matrix(1.059524, 0, 0, 1.059524, -7.749474, -10.535496)" id="object-0"><g><rect x="76" y="46" width="132" height="96" rx="18" fill="#7C96D6" stroke="#1C2547" stroke-width="6" style="paint-order: stroke;"/><path d="M 76 64.902 L 76 62.982 C 76 53.437 84.059 45.699 94 45.699 L 190 45.699 C 199.941 45.699 208 53.437 208 62.982 L 208 64.902 L 76 64.902 Z" fill="#C96A1F" style=""/><rect x="76" y="64.174" width="132" height="9.826" fill="#C96A1F" style=""/></g><g transform="matrix(1, 0, 0, 1, 0, 3.77528)"><rect x="44" y="96" width="168" height="112" rx="20" fill="#F2F2F2" stroke="#1C2547" stroke-width="6" style="paint-order: stroke;"/><path d="M44 116 v-0 a20 20 0 0 1 20 -20 h128 a20 20 0 0 1 20 20 v0 z" fill="#FF7A1A"/><rect x="44" y="115.321" width="168" height="12.679" fill="#FF7A1A" style=""/><circle cx="62" cy="106" r="5" fill="white" opacity="0.9"/><circle cx="78" cy="106" r="5" fill="white" opacity="0.55"/><circle cx="94" cy="106" r="5" fill="white" opacity="0.35"/><rect x="62" y="144" width="88" height="10" rx="5" fill="#2B4776" opacity="0.18"/><rect x="62" y="162" width="132" height="10" rx="5" fill="#2B4776" opacity="0.12"/><rect x="62" y="180" width="72" height="10" rx="5" fill="#2B4776" opacity="0.12"/></g><g transform="matrix(1, 0, 0, 1, 0, 0.125578)"><rect x="96" y="220" width="24" height="8" rx="4" fill="#9AA3BD" stroke="#1C2547" stroke-width="3" style="paint-order: stroke;"/><rect x="124" y="220" width="36" height="8" rx="4" fill="#FF7A1A" stroke="#1C2547" stroke-width="3" style="paint-order: stroke;"/></g></g></svg>

@@ -3,8 +3,14 @@
 > **AI disclaimer:** This extension was created with the help of Claude, an AI assistant made by Anthropic.
 > The design, testing and direction are by the repository owner. Review the code before relying on it.
 
-<!-- Add a screenshot: put an image at screenshots/preview.png (or change the path below). -->
-![4ever preview](screenshots/preview.png)
+<p align="center">
+  <img src="screenshots/taskbar-dark.png" alt="The taskbar, dark style">
+  <img src="screenshots/taskbar-light.png" alt="The taskbar, light style">
+</p>
+<p align="center">
+  <img src="screenshots/start-dark.png" alt="The Start menu, dark style" width="48%">
+  <img src="screenshots/start-light.png" alt="The Start menu, light style" width="48%">
+</p>
 
 A GNOME Shell extension that gives GNOME a familiar bottom-taskbar desktop: a centered Start menu,
 a taskbar with running apps, a hidden-icons tray, a clock, and notifications at the bottom right.
@@ -33,6 +39,16 @@ Works with GNOME Shell 50 and 51. Not affiliated with, or derived from, any othe
 - Bundled icon set for the Start button, search and Task view in transparent, dark, light or ember styles
   (transparent is the default), or use your distribution's logo or your own image for Start.
 - Skips GNOME's overview after login and can hide the dash in Task view.
+
+## What's new in 0.3
+
+- Taskbar buttons only raise the app's window; the Start menu opens a new window.
+- Clicking a taskbar app while Start is open in a game or full-screen app now works.
+- One mark under the icon for each open window of an app (up to four).
+- Hover preview: a card with a live thumbnail per window above the button. Click to raise, middle-click or X to close.
+- New icon set for Start, search and Task view, sized to match app icons, and a new 4 logo.
+- An About page in the settings (links, story, disclaimers) with a banner that follows light and dark.
+- Separate icon size and spacing per Start, search and Task view button; icon spacing can be negative.
 
 ## What's new in 0.2
 

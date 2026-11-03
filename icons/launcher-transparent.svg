@@ -1,19 +1,2 @@
-<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- transparent: same tile grid as launcher-dark, loupe layered opaque so nothing shows through -->
-  <g>
-    <rect x="48" y="48" width="66" height="66" rx="20" fill="white" stroke="#1C2547" stroke-width="6"/>
-    <rect x="126" y="48" width="66" height="66" rx="20" fill="white" stroke="#1C2547" stroke-width="6"/>
-    <rect x="48" y="126" width="66" height="66" rx="20" fill="white" stroke="#1C2547" stroke-width="6"/>
-    <rect x="126" y="126" width="66" height="66" rx="20" fill="#FF7A1A" stroke="#1C2547" stroke-width="6"/>
-  </g>
-  <g>
-    <!-- loupe body: navy keyline outside, blue ring inside -->
-    <circle cx="172" cy="172" r="35" fill="white" stroke="#1C2547" stroke-width="6"/>
-    <circle cx="172" cy="172" r="29" fill="none" stroke="#4373EE" stroke-width="7"/>
-    <!-- bubble highlight, same as solid versions -->
-    <circle cx="160" cy="160" r="7" fill="#4373EE" opacity="0.18"/>
-    <!-- handle: opaque navy underlay + opaque orange top, drawn LAST so ring can't ghost through -->
-    <line x1="193" y1="193" x2="216" y2="216" stroke="#1C2547" stroke-width="25" stroke-linecap="round"/>
-    <line x1="193" y1="193" x2="216" y2="216" stroke="#FF7A1A" stroke-width="19" stroke-linecap="round"/>
-  </g>
-</svg>
+<?xml version="1.0" encoding="utf-8"?>
+<svg height="256px" viewBox="16 16 224 224" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com" width="256px" preserveAspectRatio="xMinYMin"><defs><bx:export><bx:file format="svg" href="#object-0" excluded="true"/><bx:file format="svg" path="Untitled 2.svg"/></bx:export></defs><g style="" transform="matrix(1.208333, 0, 0, 1.208333, -36.999973, -36.999985)" id="object-0"><g><rect x="48" y="48" width="66" height="66" rx="20" fill="white" stroke="#1C2547" stroke-width="6"/><rect x="126" y="48" width="66" height="66" rx="20" fill="white" stroke="#1C2547" stroke-width="6"/><rect x="48" y="126" width="66" height="66" rx="20" fill="white" stroke="#1C2547" stroke-width="6"/><rect x="126" y="126" width="66" height="66" rx="20" fill="#FF7A1A" stroke="#1C2547" stroke-width="6"/></g><g><circle cx="172" cy="172" r="35" fill="white" stroke="#1C2547" stroke-width="6"/><circle cx="172" cy="172" r="29" fill="none" stroke="#4373EE" stroke-width="7"/><circle cx="160" cy="160" r="7" fill="#4373EE" opacity="0.18"/><line x1="193" y1="193" x2="216" y2="216" stroke="#1C2547" stroke-width="25" stroke-linecap="round"/><line x1="193" y1="193" x2="216" y2="216" stroke="#FF7A1A" stroke-width="19" stroke-linecap="round"/></g></g></svg>

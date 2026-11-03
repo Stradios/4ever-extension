@@ -79,9 +79,39 @@
       <summary>Hidden-icons box opacity in percent</summary>
     </key>
     <key name="icon-spacing" type="i">
-      <range min="0" max="24"/>
+      <range min="-20" max="24"/>
       <default>4</default>
       <summary>Space between taskbar icons</summary>
+    </key>
+    <key name="start-icon-size" type="i">
+      <range min="16" max="64"/>
+      <default>28</default>
+      <summary>Size of the Start button icon</summary>
+    </key>
+    <key name="start-icon-spacing" type="i">
+      <range min="0" max="30"/>
+      <default>10</default>
+      <summary>Space on each side of the Start button icon</summary>
+    </key>
+    <key name="search-icon-size" type="i">
+      <range min="16" max="64"/>
+      <default>28</default>
+      <summary>Size of the search icon</summary>
+    </key>
+    <key name="search-icon-spacing" type="i">
+      <range min="0" max="30"/>
+      <default>10</default>
+      <summary>Space on each side of the search icon</summary>
+    </key>
+    <key name="taskview-icon-size" type="i">
+      <range min="16" max="64"/>
+      <default>28</default>
+      <summary>Size of the Task view icon</summary>
+    </key>
+    <key name="taskview-icon-spacing" type="i">
+      <range min="0" max="30"/>
+      <default>10</default>
+      <summary>Space on each side of the Task view icon</summary>
     </key>
     <key name="start-highlight" type="b">
       <default>true</default>
