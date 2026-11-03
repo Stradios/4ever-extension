@@ -4,12 +4,13 @@
 > The design, testing and direction are by the repository owner. Review the code before relying on it.
 
 <p align="center">
-  <img src="screenshots/taskbar-dark.png" alt="The taskbar, dark style">
-  <img src="screenshots/taskbar-light.png" alt="The taskbar, light style">
+  <img src="screenshots/start-dark.png" alt="The Start menu, dark style" width="39%"><br>
+  <img src="screenshots/taskbar-dark.png" alt="The taskbar, dark style" width="100%">
 </p>
+
 <p align="center">
-  <img src="screenshots/start-dark.png" alt="The Start menu, dark style" width="48%">
-  <img src="screenshots/start-light.png" alt="The Start menu, light style" width="48%">
+  <img src="screenshots/start-light.png" alt="The Start menu, light style" width="39%"><br>
+  <img src="screenshots/taskbar-light.png" alt="The taskbar, light style" width="100%">
 </p>
 
 A GNOME Shell extension that gives GNOME a familiar bottom-taskbar desktop: a centered Start menu,
